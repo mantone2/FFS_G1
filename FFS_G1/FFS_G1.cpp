@@ -21,6 +21,14 @@
 //
 //		rev 0. Michael Antonelli		12-FEB-2011
 //
-//		FFS_Spirit is a pathfinding engine implementation.
+//		FFS_G1 is the core executable for the G1 game prototype.
 //
 ////////////////////////////////////////////////////////////////////////////////
+
+#include "FFS_G1.h"
+#include <SDL.h>
+
+int main(int argc, char* argv[])
+{
+	return 0;
+}

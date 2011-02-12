@@ -20,4 +20,14 @@
   <ItemGroup>
     <CustomBuild Include="..\SDL\lib\SDL.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="FFS_G1.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="FFS_G1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>
