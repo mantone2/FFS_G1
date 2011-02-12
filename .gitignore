@@ -11,6 +11,8 @@ deps
 *.exe
 *.o
 *.so
+*.sdf
+*.suo
 
 # Packages #
 ############
@@ -40,5 +42,3 @@ Icon?
 Thumbs.db
 *.opensdf
 Debug
-*.sdf
-*.suo
