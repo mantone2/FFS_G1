@@ -30,6 +30,7 @@ deps
 *.log
 *.sql
 *.sqlite
+*.tlog
 
 # OS generated files #
 ######################
