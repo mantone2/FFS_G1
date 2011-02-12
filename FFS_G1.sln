@@ -2,8 +2,14 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C++ Express 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FFS_G1", "FFS_G1\FFS_G1.vcxproj", "{AB044DE2-1F6A-48C3-8377-0CC018A30C73}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A2725998-FB5C-4500-A1D4-F50FF49F0620} = {A2725998-FB5C-4500-A1D4-F50FF49F0620}
+		{C463C5F0-6809-420E-85D0-5527EE4B4DBE} = {C463C5F0-6809-420E-85D0-5527EE4B4DBE}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FFS_NETIO", "FFS_NETIO\FFS_NETIO.vcxproj", "{C463C5F0-6809-420E-85D0-5527EE4B4DBE}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FFS_Spirit", "FFS_Spirit\FFS_Spirit.vcxproj", "{A2725998-FB5C-4500-A1D4-F50FF49F0620}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +25,10 @@ Global
 		{C463C5F0-6809-420E-85D0-5527EE4B4DBE}.Debug|Win32.Build.0 = Debug|Win32
 		{C463C5F0-6809-420E-85D0-5527EE4B4DBE}.Release|Win32.ActiveCfg = Release|Win32
 		{C463C5F0-6809-420E-85D0-5527EE4B4DBE}.Release|Win32.Build.0 = Release|Win32
+		{A2725998-FB5C-4500-A1D4-F50FF49F0620}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A2725998-FB5C-4500-A1D4-F50FF49F0620}.Debug|Win32.Build.0 = Debug|Win32
+		{A2725998-FB5C-4500-A1D4-F50FF49F0620}.Release|Win32.ActiveCfg = Release|Win32
+		{A2725998-FB5C-4500-A1D4-F50FF49F0620}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
