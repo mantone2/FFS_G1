@@ -25,6 +25,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\SDL.dll" />
+    <None Include="..\SDL\lib\SDL.dll" />
   </ItemGroup>
 </Project>

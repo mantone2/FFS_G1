@@ -61,7 +61,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="..\README.txt" />
-    <CustomBuild Include="..\SDL.dll">
+    <CustomBuild Include="..\SDL\lib\SDL.dll">
       <FileType>Document</FileType>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">copy /Y %(FullPath) $(TargetDir)%(Filename)%(Extension)</Command>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying SDL.dll</Message>
