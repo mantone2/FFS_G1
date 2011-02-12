@@ -117,10 +117,39 @@ bool	win32StartTCP(SOCKET *someSock, struct sockaddr_in *someAddr, int somePort,
 	return true;
 }
 
+bool	win32ListenTCP(SOCKET *someSock, struct sockaddr_in *someAddr, int somePort)
+{
+	int rv;
+
+	*someSock = socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
+	someAddr->sin_family = AF_INET;
+	someAddr->sin_port = htons(somePort);
+	someAddr->sin_addr.s_addr = htonl(INADDR_ANY);
+	memset(someAddr->sin_zero,0,8);
+	rv = bind(*someSock,(SOCKADDR*)someAddr,sizeof(*someAddr));
+	if (rv < 0)
+	{
+		//Error
+		closesocket(*someSock);
+		someSock = 0;
+		return false;
+	}
+	rv = listen(*someSock,SOMAXCONN);
+	if (rv < 0)
+	{
+		//Error
+		closesocket(*someSock);
+		someSock = 0;
+		return false;
+	}
+	return true;
+}
+
 #define FFS_NET_START()					win32StartNet()
 #define FFS_NET_STOP()					win32StopNet()
 #define FFS_NET_ERROR()					win32ErrorNet()
 #define FFS_NET_SOCK_TCP(X,Y,Z,Q)		win32StartTCP(X,Y,Z,Q)
+#define	FFS_NET_LIS_TCP(X,Y,Z)			win32ListenTCP(X,Y,Z)					//Creates a listener
 #define FFS_NET_SOCK_UDP()				NYI()
 #define	FFS_NET_SLEEP()					Sleep(X)
 #endif
@@ -132,13 +161,23 @@ bool	win32StartTCP(SOCKET *someSock, struct sockaddr_in *someAddr, int somePort,
 //
 /////////////////////////////////////////////////////////////
 
+struct	AHelperData
+{
+	int Port;
+	unsigned long Address;
+	void (*CallBack)(socketFd_t Socket, unsigned long Address);	
+	uint32_t Timeout;
+};
 			int32_t			FFS_Net_Initialize();													//initializes network connection
-			socketFd_t		FFS_Net_ConnectToPeer(int Port, unsigned long Address);					//connects peer to peer to another user
-			bool			FFS_Net_AConnectToPeer();												//connects peer to peer to another user (async)
-			bool			FFS_Net_AListenForPeerConnection();										//waits for a peer connection (async)
-			bool			FFS_Net_AListenForPeerConnectionFrom();									//waits for a peer connection from a specific ip (async)
+			socketFd_t		FFS_Net_TCP_ConnectToPeer(int Port, unsigned long Address);					//connects peer to peer to another user
+			bool			FFS_Net_TCP_AConnectToPeer(int Port, unsigned long Address, void(*CallBack)(socketFd_t Status, unsigned long Address));												//connects peer to peer to another user (async)			
+			bool			FFS_Net_TCP_AListenForPeer(int Port, void(*CallBack)(socketFd_t Socket, unsigned long Address));								//waits for a peer connection (async)
+			bool			FFS_Net_TCP_AListenForPeerFrom(int Port, unsigned long Address, void(*CallBack)(socketFd_t Socket, unsigned long Address));									//waits for a peer connection from a specific ip (async)
+
 			bool			FFS_Net_Cleanup();														//Cleans up network			
 
+			int				FFS_Net_TCP_AConnectToPeerHelper(void* Data);
+			int				FFS_Net_TCP_AListenForPeerHelper(void* Data);
 
 #ifdef __cplusplus
 };
