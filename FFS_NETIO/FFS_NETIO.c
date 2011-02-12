@@ -2,6 +2,17 @@
 #include <SDL.h>
 #include <stdlib.h>
 
+/////////////////////////////////////////////////////////////////////////////////////
+//
+//	FFS_Net_initialize
+//
+//	Starts up networking for OSes which require special network configs like Windows
+//	Sets a global variable saying network is ready.
+//	Call FFS_Net_Cleanup to cleanup networking.
+//	Returns a signed 32int with error code, if any.
+//	Returns 0 on success
+//
+/////////////////////////////////////////////////////////////////////////////////////
 			int32_t			FFS_Net_Initialize()
 {
 	int err = 0; //err will contain a socket error code. 0 = no error
@@ -20,6 +31,17 @@
 	return err;
 }
 
+/////////////////////////////////////////////////////////////////////////////////////
+//
+//	FFS_Net_TCP_ConnectToPeer
+//
+//	Creates a TCP socket then auto-connects to a peer location.
+//	Takes a port number and unsigned long IP address.
+//	IP Address is made using inet_ntoa on a string containing the IP
+//	Function is synchronous, blocks, and will keep attempting up to 5 times.
+//	returns -1 on not init network. -9 on timeouts.
+//	returns the socket descriptor on success.
+/////////////////////////////////////////////////////////////////////////////////////
 			socketFd_t		FFS_Net_TCP_ConnectToPeer(int Port, unsigned long Address)
 {
 	//-1 = net not init
@@ -51,7 +73,19 @@
 	}
 	return mySock;
 }
-			//connects peer to peer to another user
+
+/////////////////////////////////////////////////////////////////////////////////////
+//
+//	FFS_Net_TCP_AConnectToPeer
+//
+//	This is an Async blocking function varient of FFS_Net_TCP_ConnectToPeer
+//	This will spawn a thread which will attempt to connect to a client.
+//	If it spawns correctly it will return true, and the specified callback function
+//	will be called upon successful connection.
+//	Returns false on error.
+//
+/////////////////////////////////////////////////////////////////////////////////////
+
 			bool			FFS_Net_TCP_AConnectToPeer(int Port, unsigned long Address, void(*CallBack)(socketFd_t Socket, unsigned long Address))
 {		
 	struct AHelperData *myData;
@@ -80,6 +114,17 @@
 	return true;
 }
 
+/////////////////////////////////////////////////////////////////////////////////////
+//
+//	FFS_Net_TCP_AConnectToPeerHelper
+//
+//	This is the threaded helper for FFS_Net_TCP_AConnectToPeer
+//	This function runs in a thread made by SDL_CreateThread
+//	It takes a pointer to an AHelperData struct as a parameter.
+//	On success it will push a callback function to the stack and return the 
+//	socket descriptor.
+//	On failure it returns a value <= 0
+/////////////////////////////////////////////////////////////////////////////////////
 			int				FFS_Net_TCP_AConnectToPeerHelper(void* Data)
 {
 	//-1 = net not init
@@ -119,10 +164,25 @@
 	free(Data);
 	return mySock;	
 }
+/////////////////////////////////////////////////////////////////////////////////////
+//
+//	FFS_Net_TCP_AListenForPeer
+//
+//	An async function which creates a port, binds it, and listens for a connection.
+//	This function is actually a special case of FFS_Net_TCP_AListenForPeerFrom
+/////////////////////////////////////////////////////////////////////////////////////
 			bool			FFS_Net_TCP_AListenForPeer(int Port, void(*CallBack)(socketFd_t Socket, unsigned long Address))
 {
 	return FFS_Net_TCP_AListenForPeerFrom(Port,0,CallBack);		
-}			
+}
+/////////////////////////////////////////////////////////////////////////////////////
+//
+//	FFS_Net_TCP_AListenForPeerFrom
+//
+//	Begins the process of async listening for a connection from a remote peer.
+//	This will spawn a thread which will wait for a single connection
+//	It will return true of the thread spawns correctly, otherwise false.
+/////////////////////////////////////////////////////////////////////////////////////
 			bool			FFS_Net_TCP_AListenForPeerFrom(int Port, unsigned long Address, void(*CallBack)(socketFd_t Socket, unsigned long Address))
 {
 	struct AHelperData *myData;
@@ -150,7 +210,23 @@
 	}
 	return true;
 }
-
+/////////////////////////////////////////////////////////////////////////////////////
+//
+//	FFS_Net_TCP_AListenForPeerHelper
+//
+//	This is a helper function for FFS_Net_TCP_AListenForPeerFrom
+//	It takes an AHelperData struct as a parameter
+//	It will create and bind a TCP socket, and begin listening for the first connection
+//	Even though it is async, it is not necessarily multiple re-entrant safe
+//	This class of functions should be replaced with a true listener server later
+//	This function will check the IP of the first client to connect,
+//	If the caller specified no IP address, it will automatically allow the first client
+//	otherwise it will check and if the IP does not match what the caller specified,
+//	it will close the socket.
+//	On successful connection this will push a callback function, and pass the 
+//	socket descriptor along with the remote client IP address.
+//	On failure it will send a <=0 value for socket.
+/////////////////////////////////////////////////////////////////////////////////////
 			int				FFS_Net_TCP_AListenForPeerHelper(void* Data)
 {
 	//-1 = net not init
@@ -206,9 +282,15 @@
 	free(Data);
 	return mySock;	
 }
+/////////////////////////////////////////////////////////////////////////////////////
+//
+//	FFS_Net_Cleanup
+//
+//	Calls cleanup functions for network.
+/////////////////////////////////////////////////////////////////////////////////////
 			bool			FFS_Net_Cleanup()
 {
 	FFS_NET_INIT_STATUS = false;
-	WSACleanup();
+	FFS_NET_STOP();
 	return true;
 }
