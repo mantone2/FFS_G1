@@ -38,8 +38,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <TargetExt>.dll</TargetExt>
-    <LibraryPath>C:\Users\Mike\Documents\Visual Studio 2010\Projects\FFS_NETIO\SDL-1.2.14\lib;$(ProjectDir);$(LibraryPath)</LibraryPath>
-    <IncludePath>C:\Users\Mike\Documents\Visual Studio 2010\Projects\FFS_NETIO\SDL-1.2.14\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)SDL\lib;$(ProjectDir);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)SDL\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

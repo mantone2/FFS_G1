@@ -38,8 +38,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <TargetExt>.dll</TargetExt>
-    <IncludePath>M:\Development\SDL-1.2.14\include;$(IncludePath)</IncludePath>
-    <LibraryPath>M:\Development\SDL-1.2.14\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)SDL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)SDL\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
