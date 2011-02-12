@@ -18,6 +18,6 @@
     <None Include="..\README.txt" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="..\SDL.dll" />
+    <CustomBuild Include="..\SDL\lib\SDL.dll" />
   </ItemGroup>
 </Project>
