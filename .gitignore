@@ -40,3 +40,5 @@ Icon?
 Thumbs.db
 *.opensdf
 Debug
+*.sdf
+*.suo
