@@ -1,6 +1,1 @@
-﻿  FFS_NETIO.c
-m:\development\ffs_g1\ffs_netio\ffs_netio.c(53): warning C4716: 'FFS_Net_AConnectToPeer' : must return a value
-m:\development\ffs_g1\ffs_netio\ffs_netio.c(54): warning C4716: 'FFS_Net_AListenForPeerConnection' : must return a value
-m:\development\ffs_g1\ffs_netio\ffs_netio.c(55): warning C4716: 'FFS_Net_AListenForPeerConnectionFrom' : must return a value
-m:\development\ffs_g1\ffs_netio\ffs_netio.c(60): warning C4716: 'FFS_Net_Cleanup' : must return a value
-  FFS_NETIO.vcxproj -> M:\Development\FFS_G1\Debug\FFS_NETIO.dll
+﻿
