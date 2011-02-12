@@ -74,6 +74,9 @@
   <ItemGroup>
     <ClInclude Include="FFS_NETIO.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\SDL.dll" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
