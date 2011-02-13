@@ -21,16 +21,7 @@
 //
 //		rev 0. Michael Antonelli		12-FEB-2011
 //
-//		FFS_G1 is the core executable for the G1 game prototype.
+//		dpQueue is a dynamic priority queue
 //
 ////////////////////////////////////////////////////////////////////////////////
-
-#include "FFS_G1.h"
-#include <SDL.h>
-#include "../FFS_NETIO/FFS_NETIO.h"
-#include "../FFS_Spirit/FFS_Spirit.h"
-
-int main(int argc, char* argv[])
-{
-	return 0;
-}
+#include "dpQueue.h"

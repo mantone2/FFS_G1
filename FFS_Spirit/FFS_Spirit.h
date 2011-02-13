@@ -24,3 +24,68 @@
 //		FFS_Spirit is a pathfinding engine implementation.
 //
 ////////////////////////////////////////////////////////////////////////////////
+
+
+#ifndef FFS_Spirit
+#define FFS_Spirit
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <SDL.h>
+
+#ifndef FFS_TYPES
+#define FFS_TYPES
+//Because WIN32 does not have headers for these types
+//we include them here for portability
+#ifdef WIN32
+
+	//Type definitions for compatable unix types
+	typedef unsigned	__int8	uint8_t;
+	typedef unsigned	__int16	uint16_t;
+	typedef unsigned	__int32	uint32_t;
+	typedef unsigned	__int64	uint64_t;
+	typedef	signed		__int8	int8_t;
+	typedef	signed		__int16	int16_t;
+	typedef	signed		__int32	int32_t;
+	typedef	signed		__int64	int64_t;
+	typedef unsigned	__int8	bool;
+#else //assume the other OS is unix based....
+#include <sys/inttypes.h>
+typedef uint8_t bool;
+#endif
+
+//The following section starts up boolean logic
+
+#ifndef FFS_BOOLEAN
+#define FFS_BOOLEAN
+#ifdef FALSE
+#undef FALSE
+#endif
+#ifdef TRUE
+#undef TRUE
+#endif
+#ifdef false
+#undef false
+#endif
+#ifdef true
+#undef true
+#endif
+#define FALSE 0
+#define TRUE 1
+#define false 0
+#define true 1
+#endif
+#endif
+
+#ifdef WIN32
+#define DECLSPEC		__declspec(dllexport)
+#endif
+
+DECLSPEC		bool		FFS_Spirit_Init(void* sPathData,SDL_mutex* sMutex, SDL_cond* sCond, void* spObj,void (*sLogCallBack)(char* pMsg,int Len));
+
+#ifdef __cplusplus
+};
+#endif

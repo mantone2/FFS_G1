@@ -24,3 +24,16 @@
 //		FFS_Spirit is a pathfinding engine implementation. 
 //
 ////////////////////////////////////////////////////////////////////////////////
+#include "FFS_Spirit.h"
+#include <Sdl.h>
+
+void		(*LogCallBack)(char* pMsg, int Len);
+void*		pPathData;
+SDL_mutex*	HostMutex;
+SDL_cond*	HostCond;
+void*		pObjects;
+
+bool		FFS_Spirit_Init(void* sPathData,SDL_mutex* sMutex, SDL_cond* sCond, void* spObj,void (*sLogCallBack)(char* pMsg,int Len))
+{
+
+}
