@@ -91,6 +91,8 @@ bool FFS_NET_INIT_STATUS = false;
 #include <Windows.h>
 typedef SOCKET			socketFd_t;
 
+#define DECLSPEC		__declspec(dllexport)
+
 bool	win32StartNet()
 {
 	WORD wVersionRequested;
@@ -187,16 +189,16 @@ struct	AHelperData
 	void (*CallBack)(socketFd_t Socket, unsigned long Address);	
 	uint32_t Timeout;
 };
-			int32_t			FFS_Net_Initialize();													//initializes network connection
-			socketFd_t		FFS_Net_TCP_ConnectToPeer(int Port, unsigned long Address);					//connects peer to peer to another user
-			bool			FFS_Net_TCP_AConnectToPeer(int Port, unsigned long Address, void(*CallBack)(socketFd_t Status, unsigned long Address));												//connects peer to peer to another user (async)			
-			bool			FFS_Net_TCP_AListenForPeer(int Port, void(*CallBack)(socketFd_t Socket, unsigned long Address));								//waits for a peer connection (async)
-			bool			FFS_Net_TCP_AListenForPeerFrom(int Port, unsigned long Address, void(*CallBack)(socketFd_t Socket, unsigned long Address));									//waits for a peer connection from a specific ip (async)
+DECLSPEC	int32_t			FFS_Net_Initialize();													//initializes network connection
+DECLSPEC	socketFd_t		FFS_Net_TCP_ConnectToPeer(int Port, unsigned long Address);					//connects peer to peer to another user
+DECLSPEC	bool			FFS_Net_TCP_AConnectToPeer(int Port, unsigned long Address, void(*CallBack)(socketFd_t Status, unsigned long Address));												//connects peer to peer to another user (async)			
+DECLSPEC	bool			FFS_Net_TCP_AListenForPeer(int Port, void(*CallBack)(socketFd_t Socket, unsigned long Address));								//waits for a peer connection (async)
+DECLSPEC	bool			FFS_Net_TCP_AListenForPeerFrom(int Port, unsigned long Address, void(*CallBack)(socketFd_t Socket, unsigned long Address));									//waits for a peer connection from a specific ip (async)
 
-			bool			FFS_Net_Cleanup();														//Cleans up network			
+DECLSPEC	bool			FFS_Net_Cleanup();														//Cleans up network			
 
-			int				FFS_Net_TCP_AConnectToPeerHelper(void* Data);
-			int				FFS_Net_TCP_AListenForPeerHelper(void* Data);
+DECLSPEC	int				FFS_Net_TCP_AConnectToPeerHelper(void* Data);
+DECLSPEC	int				FFS_Net_TCP_AListenForPeerHelper(void* Data);
 
 #ifdef __cplusplus
 };

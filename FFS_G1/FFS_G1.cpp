@@ -27,6 +27,7 @@
 
 #include "FFS_G1.h"
 #include <SDL.h>
+#include "../FFS_NETIO/FFS_NETIO.h"
 
 int main(int argc, char* argv[])
 {
